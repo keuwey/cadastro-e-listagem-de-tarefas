@@ -1,0 +1,11 @@
+[project]
+name = "cadastro-e-listagem-de-tarefas"
+version = "0.1.0"
+description = "Sistema de cadastro e listagem de tarefas feito em Flask"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.0.3",
+    "mypy>=1.13.0",
+    "sqlalchemy>=2.0.36",
+]
