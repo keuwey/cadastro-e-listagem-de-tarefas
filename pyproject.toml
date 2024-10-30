@@ -5,7 +5,11 @@ description = "Sistema de cadastro e listagem de tarefas feito em Flask"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "flask-sqlalchemy>=3.1.1",
     "flask>=3.0.3",
     "mypy>=1.13.0",
+    "psycopg2>=2.9.10",
+    "pyodbc>=5.2.0",
+    "python-dotenv>=1.0.1",
     "sqlalchemy>=2.0.36",
 ]

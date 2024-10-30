@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Tarefas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+    <a href="{{ url_for('incluir') }}" class="add-button">Incluir Nova Tarefa</a>
+    <table>
+        <tr>
+            <th>Ordem</th>
+            <th>Nome da Tarefa</th>
+            <th>Custo (R$)</th>
+            <th>Data Limite</th>
+            <th>Ações</th>
+        </tr>
+        {% for tarefa in tarefas %}
+        <tr {% if tarefa.custo >= 1000 %}style="background-color: yellow;"{% endif %}>
+            <td>{{ tarefa.ordem }}</td>
+            <td>{{ tarefa.nome }}</td>
+            <td>R$ {{ tarefa.custo }}</td>
+            <td>{{ tarefa.data_limite }}</td>
+            <td>
+                <a href="{{ url_for('editar', tarefa_id=tarefa.id) }}">✏️ Editar</a>
+                <form action="{{ url_for('excluir', tarefa_id=tarefa.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">🗑️ Excluir</button>
+                </form>
+                <form action="{{ url_for('reordenar', tarefa_id=tarefa.id, direcao='cima') }}" method="POST" style="display:inline;">
+                    <button type="submit" {% if loop.index == 1 %}disabled{% endif %}>⬆️ Subir</button>
+                </form>
+                <form action="{{ url_for('reordenar', tarefa_id=tarefa.id, direcao='baixo') }}" method="POST" style="display:inline;">
+                    <button type="submit" {% if loop.index == tarefas|length %}disabled{% endif %}>⬇️ Descer</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
