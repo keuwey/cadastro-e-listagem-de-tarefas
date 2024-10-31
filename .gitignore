@@ -11,15 +11,14 @@ wheels/
 # Virtual environments
 .venv
 
-.prettierrc
 .ruff_cache
-ruff.toml
 
 pip-log.txt
 pip-delete-this-directory.txt
 
-instance/
+# instance/
 .webassets-cache
+testes-reordenar-tarefas.txt
 
 .env
 .venv

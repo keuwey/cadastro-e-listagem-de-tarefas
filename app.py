@@ -1,25 +1,14 @@
-import os
+from datetime import datetime
 
-from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, url_for
 
+from config import Config
 from models.models import Tarefa, db
 
 app = Flask(__name__)
 
-db_user = os.getenv("DB_USER")
-db_password = os.getenv("DB_PASSWORD")
-db_host = os.getenv("DB_HOST")
-db_name = os.getenv("DB_NAME")
+app.config.from_object(Config)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "mssql+pyodbc://DB_USER:DB_PASSWORD@DB_HOST/DB_NAME?driver=ODBC+Driver+18+for+SQL+Server"
-)
-
-
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-load_dotenv()
-app.secret_key = os.getenv("SECRET_KEY")  # Necessário para flash messages
 db.init_app(app)
 
 with app.app_context():
@@ -37,7 +26,8 @@ def cadastro():
     if request.method == "POST":
         nome = request.form["nome"]
         custo = float(request.form["custo"])
-        data_limite = request.form["data_limite"]
+        data_limite_str = request.form["data_limite"]
+        data_limite = datetime.strptime(data_limite_str, "%Y-%m-%d").date()
 
         # Verificar se a tarefa já existe
         if Tarefa.query.filter_by(nome=nome).first():
@@ -62,7 +52,8 @@ def editar_tarefa(tarefa_id: int):
     if request.method == "POST":
         nome = request.form["nome"]
         custo = float(request.form["custo"])
-        data_limite = request.form["data_limite"]
+        data_limite_str = request.form["data_limite"]
+        data_limite = datetime.strptime(data_limite_str, "%Y-%m-%d").date()
 
         # Verificar se o novo nome já existe
         if tarefa.nome != nome and Tarefa.query.filter_by(nome=nome).first():
@@ -87,18 +78,31 @@ def excluir_tarefa(tarefa_id: int):
     return redirect(url_for("index"))
 
 
-@app.route("/reordenar/<int:tarefa_id>/<string:direcao>")
+@app.route("/reordenar/<int:tarefa_id>/<string:direcao>", methods=["POST", "PATCH"])
 def reordenar(tarefa_id: int, direcao: str):
     tarefa = Tarefa.query.get_or_404(tarefa_id)
-    if direcao == "cima" and tarefa.ordem > 1:
-        tarefa_anterior = Tarefa.query.filter_by(ordem=tarefa.ordem - 1).first()
-        tarefa_anterior.ordem += 1
-        tarefa.ordem -= 1
+    ordem_atual = tarefa.ordem
+
+    if direcao == "cima":
+        tarefa_anterior = (
+            Tarefa.query.filter(Tarefa.ordem < ordem_atual).order_by(Tarefa.ordem.desc()).first()
+        )
+        if tarefa_anterior:
+            # Troca as ordens
+            tarefa_anterior.ordem, tarefa.ordem = ordem_atual, tarefa_anterior.ordem
+            db.session.commit()
     elif direcao == "baixo":
-        tarefa_proxima = Tarefa.query.filter_by(ordem=tarefa.ordem + 1).first()
-        if tarefa_proxima:
-            tarefa_proxima.ordem -= 1
-            tarefa.ordem += 1
+        tarefa_sucessora = Tarefa.query.filter(Tarefa.ordem > ordem_atual).order_by(Tarefa.ordem).first()
+        if tarefa_sucessora:
+            # Troca as ordens
+            tarefa_sucessora.ordem, tarefa.ordem = ordem_atual, tarefa_sucessora.ordem
+            db.session.commit()
+
+    # Certifica que todas as ordens sejam únicas após a troca
+    tarefas = Tarefa.query.order_by(Tarefa.ordem).all()
+    for index, t in enumerate(tarefas):
+        if t.ordem != index + 1:
+            t.ordem = index + 1
 
     db.session.commit()
     return redirect(url_for("index"))

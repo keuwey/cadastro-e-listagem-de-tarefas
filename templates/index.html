@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Lista de Tarefas</h1>
-    <a href="{{ url_for('incluir') }}" class="add-button">Incluir Nova Tarefa</a>
+    <a href="{{ url_for('cadastro') }}" class="add-button">Cadastrar Nova Tarefa</a>
     <table>
         <tr>
             <th>Ordem</th>
@@ -22,10 +22,10 @@
             <td>{{ tarefa.ordem }}</td>
             <td>{{ tarefa.nome }}</td>
             <td>R$ {{ tarefa.custo }}</td>
-            <td>{{ tarefa.data_limite }}</td>
+            <td>{{ tarefa.data_limite.strftime('%d/%m/%Y') }}</td>
             <td>
-                <a href="{{ url_for('editar', tarefa_id=tarefa.id) }}">✏️ Editar</a>
-                <form action="{{ url_for('excluir', tarefa_id=tarefa.id) }}" method="POST" style="display:inline;">
+                <a href="{{ url_for('editar_tarefa', tarefa_id=tarefa.id) }}">✏️ Editar</a>
+                <form action="{{ url_for('excluir_tarefa', tarefa_id=tarefa.id) }}" method="POST" style="display:inline;">
                     <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">🗑️ Excluir</button>
                 </form>
                 <form action="{{ url_for('reordenar', tarefa_id=tarefa.id, direcao='cima') }}" method="POST" style="display:inline;">
