@@ -1,66 +1,102 @@
 * {
-  margin: 0;
-  border: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
 }
 
-ol,
-ul {
-  list-style: none;
+.btn-cadastro, .btn-editar {
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cadastro, .btn-editar:hover {
+    background-color: #0056b3;
+}
+
+.back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 15px 20px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+.back-button a {
+    color: white;
+    text-decoration: none;
+}
+
+#nome, #custo, #data_limite {
+    font-size: 19px;
+    height: 25px;
+}
+
+ol, ul {
+    list-style: none;
 }
 
 h1 {
-  color: #333;
+    color: #333;
 }
 
 a {
-  text-decoration: none;
-  color: #007bff;
+    text-decoration: none;
+    color: #007bff;
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-th,
-td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
 }
 
 th {
-  background-color: #007bff;
-  color: white;
+    background-color: #007bff;
+    color: white;
 }
 
 .highlight {
-  background-color: #ffeb3b;
+    background-color: #ffeb3b;
 }
 
 .btn {
-  display: inline-block;
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  text-align: center;
-  margin-bottom: 20px;
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .btn:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
