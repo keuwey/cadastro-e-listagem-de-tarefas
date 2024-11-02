@@ -8,15 +8,12 @@ dist/
 wheels/
 *.egg-info
 
-# Virtual environments
-.venv
-
 .ruff_cache
 
 pip-log.txt
 pip-delete-this-directory.txt
 
-# instance/
+instance/
 .webassets-cache
 testes-reordenar-tarefas.txt
 
@@ -37,3 +34,6 @@ dmypy.json
 .pytype/
 
 .idea/
+
+ruff.toml
+.prettierrc
