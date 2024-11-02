@@ -83,26 +83,31 @@ def reordenar(tarefa_id: int, direcao: str):
     tarefa = Tarefa.query.get_or_404(tarefa_id)
     ordem_atual = tarefa.ordem
 
-    if direcao == "cima":
-        tarefa_anterior = (
-            Tarefa.query.filter(Tarefa.ordem < ordem_atual).order_by(Tarefa.ordem.desc()).first()
-        )
-        if tarefa_anterior:
-            # Troca as ordens
-            tarefa_anterior.ordem, tarefa.ordem = ordem_atual, tarefa_anterior.ordem
-            db.session.commit()
-    elif direcao == "baixo":
-        tarefa_sucessora = Tarefa.query.filter(Tarefa.ordem > ordem_atual).order_by(Tarefa.ordem).first()
-        if tarefa_sucessora:
-            # Troca as ordens
-            tarefa_sucessora.ordem, tarefa.ordem = ordem_atual, tarefa_sucessora.ordem
-            db.session.commit()
+    with db.session.no_autoflush:
+        if direcao == "cima":
+            tarefa_anterior = (
+                Tarefa.query.filter(Tarefa.ordem < ordem_atual).order_by(Tarefa.ordem.desc()).first()
+            )
+            if tarefa_anterior:
+                tarefa.ordem = -1
+                db.session.flush()
 
-    # Certifica que todas as ordens sejam únicas após a troca
+                tarefa.ordem = tarefa_anterior.ordem
+                tarefa_anterior.ordem = ordem_atual
+
+        elif direcao == "baixo":
+            tarefa_sucessora = Tarefa.query.filter(Tarefa.ordem > ordem_atual).order_by(Tarefa.ordem).first()
+            if tarefa_sucessora:
+                tarefa.ordem = -1
+                db.session.flush()
+
+                tarefa.ordem = tarefa_sucessora.ordem
+                tarefa_sucessora.ordem = ordem_atual
+
+    # Renumera todas as tarefas para garantir unicidade
     tarefas = Tarefa.query.order_by(Tarefa.ordem).all()
     for index, t in enumerate(tarefas):
-        if t.ordem != index + 1:
-            t.ordem = index + 1
+        t.ordem = index + 1
 
     db.session.commit()
     return redirect(url_for("index"))
