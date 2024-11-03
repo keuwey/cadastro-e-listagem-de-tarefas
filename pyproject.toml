@@ -7,7 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "flask-sqlalchemy>=3.1.1",
     "flask>=3.0.3",
-    "mypy>=1.13.0",
+    "gunicorn>=23.0.0",
     "python-dotenv>=1.0.1",
     "sqlalchemy>=2.0.36",
 ]
