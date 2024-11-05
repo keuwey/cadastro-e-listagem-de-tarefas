@@ -1,11 +1,18 @@
 from datetime import datetime
 
+from babel.numbers import format_currency
 from flask import Flask, flash, redirect, render_template, request, url_for
 
 from config import Config
 from models.models import Tarefa, db
 
 app = Flask(__name__)
+
+
+@app.template_filter("currency")
+def currency_filter(value):
+    return format_currency(value, "BRL", locale="pt_BR")
+
 
 app.config.from_object(Config)
 

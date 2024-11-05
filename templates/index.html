@@ -21,7 +21,7 @@
         <tr {% if tarefa.custo >= 1000 %}style="background-color: yellow;"{% endif %}>
             <td>{{ tarefa.ordem }}</td>
             <td>{{ tarefa.nome }}</td>
-            <td>R$ {{ tarefa.custo }}</td>
+            <td>{{ tarefa.custo | currency }}</td>
             <td>{{ tarefa.data_limite.strftime('%d/%m/%Y') }}</td>
             <td>
                 <a href="{{ url_for('editar_tarefa', tarefa_id=tarefa.id) }}">✏️ Editar</a>
