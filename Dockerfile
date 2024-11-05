@@ -21,4 +21,4 @@ ENV FLASK_ENV=development
 EXPOSE 5000
 
 # Definir o comando para iniciar a aplicação
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app", "--workers=3"]
