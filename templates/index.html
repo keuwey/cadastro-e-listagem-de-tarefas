@@ -24,15 +24,15 @@
             <td>{{ tarefa.custo | currency }}</td>
             <td>{{ tarefa.data_limite.strftime('%d/%m/%Y') }}</td>
             <td>
-                <a href="{{ url_for('editar_tarefa', tarefa_id=tarefa.id) }}">✏️ Editar</a>
+                <a href="{{ url_for('editar_tarefa', tarefa_id=tarefa.id) }}" class="a-link-index">✏️ Editar</a>
                 <form action="{{ url_for('excluir_tarefa', tarefa_id=tarefa.id) }}" method="POST" style="display:inline;">
-                    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">🗑️ Excluir</button>
+                    <button type="submit" class="btn-excluir-index" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">🗑️ Excluir</button>
                 </form>
                 <form action="{{ url_for('reordenar', tarefa_id=tarefa.id, direcao='cima') }}" method="POST" style="display:inline;">
-                    <button type="submit" {% if loop.index == 1 %}disabled{% endif %}>⬆️ Subir</button>
+                    <button type="submit" class="btn-subir-index" {% if loop.index == 1 %}disabled{% endif %}>⬆️ Subir</button>
                 </form>
                 <form action="{{ url_for('reordenar', tarefa_id=tarefa.id, direcao='baixo') }}" method="POST" style="display:inline;">
-                    <button type="submit" {% if loop.index == tarefas|length %}disabled{% endif %}>⬇️ Descer</button>
+                    <button type="submit" class="btn-descer-index" {% if loop.index == tarefas|length %}disabled{% endif %}>⬇️ Descer</button>
                 </form>
             </td>
         </tr>

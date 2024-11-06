@@ -9,16 +9,15 @@
   <body>
     <h1>Cadastrar Nova Tarefa</h1>
     <form method="POST">
-      <label for="nome">Nome da Tarefa:</label>
-      <input type="text" id="nome" name="nome" required />
+      <label for="nome" class="cadastro-form-items">Nome da Tarefa:</label>
+      <input type="text" id="nome" name="nome" class="cadastro-form-items" required />
 
-      <label for="custo">Custo (R$):</label>
-      <input type="number" id="custo" name="custo" step="0.01" required />
+      <label for="custo" class="cadastro-form-items">Custo (R$):</label>
+      <input type="number" id="custo" name="custo" step="0.01" class="cadastro-form-items" required />
 
-      <label for="data_limite">Data Limite:</label>
-      <input type="date" id="data_limite" name="data_limite" placeholder="dd/mm/aaaa" required />
-
-      <button type="submit" class="btn-cadastro">Incluir Tarefa</button>
+      <label for="data_limite" class="cadastro-form-items">Data Limite:</label>
+      <input type="date" id="data_limite" name="data_limite" placeholder="dd/mm/aaaa" class="cadastro-form-items" required />
+      <button type="submit" class="btn-cadastro cadastro-form-items">Incluir Tarefa</button>
     </form>
     <button class="back-button btn-cadastro">
       <a href="{{ url_for('index') }}" class="a-link">Voltar</a>

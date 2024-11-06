@@ -11,13 +11,12 @@ body {
   padding: 20px;
 }
 
-.btn-cadastro,
-.btn-editar {
-  margin-top: 15px;
+.btn-cadastro, .btn-editar {
   background-color: #007bff;
   color: white;
   border: none;
   padding: 10px;
+  margin: 10px;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -57,15 +56,12 @@ body {
   cursor: pointer;
 }
 
-#nome,
-#custo,
-#data_limite {
-  font-size: 19px;
+#nome, #custo, #data_limite {
+  font-size: 16px;
   height: 25px;
 }
 
-ol,
-ul {
+ol, ul {
   list-style: none;
 }
 
@@ -89,8 +85,7 @@ table {
   margin-top: 20px;
 }
 
-th,
-td {
+th, td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
@@ -117,4 +112,24 @@ th {
 
 .btn:hover {
   background-color: #0056b3;
+}
+
+.a-link-index {
+  color: black;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.a-link-index:hover {
+  text-decoration: none;
+}
+
+.btn-excluir-index, .btn-subir-index, .btn-descer-index {
+  font-size: 14px;
+  font-weight: normal;
+  background-color: initial;
+}
+
+.cadastro-form-items {
+  margin: 10px;
 }
