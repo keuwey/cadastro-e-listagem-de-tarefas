@@ -13,3 +13,7 @@ services:
       - DATABASE_URL=sqlite:///tarefas.db
     volumes:
       - .:/app
+      - db_data:/app/tarefas.db
+
+volumes:
+  db_data:
