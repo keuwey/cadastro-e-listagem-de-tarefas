@@ -10,7 +10,7 @@ class Tarefa(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     custo = db.Column(db.Float, nullable=False)
     data_limite = db.Column(db.Date, nullable=False)
-    ordem = db.Column(db.Integer, unique=True, nullable=False)
+    ordem = db.Column(db.Integer, nullable=False)
 
     def __repr__(self) -> str:
         return f"<Tarefa {self.nome}>"
