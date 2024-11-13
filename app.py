@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from babel.numbers import format_currency
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, Response, flash, redirect, render_template, request, url_for
 
 from config import Config
 from models.models import Tarefa, db
@@ -118,6 +118,11 @@ def reordenar(tarefa_id: int, direcao: str):
 
     db.session.commit()
     return redirect(url_for("index"))
+
+
+@app.route("/health", methods=["GET"])
+def health() -> Response:
+    return Response("{'status':'ok'}", status=200, mimetype="application/json")
 
 
 if __name__ == "__main__":
