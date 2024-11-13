@@ -8,10 +8,10 @@ services:
     environment:
       - FLASK_ENV=production
       - FLASK_APP=app.py
-      - DATABASE_URL=sqlite:///data/tarefas.db
+      - DATABASE_URL=sqlite:///tarefas.db
     volumes:
       - .:/app
-      - db:/app/data
+      - app-tarefas:/app/instance
 
 volumes:
-  db:
+  app-tarefas:
