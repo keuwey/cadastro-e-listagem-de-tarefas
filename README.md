@@ -6,7 +6,7 @@ Projetinho feito como instrumento avaliativo em um processo seletivo.
 
 A aplicação está hospedada na plataforma [Render](https://render.com/) e está acessível no seguinte link:
 
-- [Aplicação de Tarefas - Deploy Render](https://cadastro-e-listagem-de-tarefas.onrender.com/)
+- [Aplicação de Tarefas - Deploy Render](https://cadastro-de-tarefas.onrender.com/)
 
 ### Executando Localmente
 
